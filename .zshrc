@@ -1,3 +1,18 @@
+# Use the homebrew version accodrding to the machine architecture
+ARCH=$(arch)
+if [[ ${ARCH} == "arm64" ]]
+then
+  # On ARM macOS, this script installs to /opt/homebrew only
+  HOMEBREW_PREFIX="/opt/homebrew"
+  HOMEBREW_REPOSITORY="${HOMEBREW_PREFIX}"
+  PATH='/opt/homebrew/bin':$PATH
+else
+  # On Intel macOS, this script installs to /usr/local only
+  HOMEBREW_PREFIX="/usr/local"
+  HOMEBREW_REPOSITORY="${HOMEBREW_PREFIX}/Homebrew"
+  PATH='$HOMEBREW_REPOSITORY/bin':$PATH
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,12 +20,15 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+autoload -U colors && colors
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export DBT_PROFILES_DIR=/Users/soapycat/Documents/Work/Holistics/dbt/profiles
+# export DBT_PROFILES_DIR=/Users/soapycat/Documents/Work/Holistics/dbt/profiles
+export DBT_PROFILES_DIR=~/.dbt
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -27,96 +45,78 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # alias
 alias gcloud="~/google-cloud-sdk/bin/gcloud"
 alias venv="source .venv/bin/activate"
+alias v=nvim
+alias src=source
+alias nvimhome="nvim ~/.config/nvim"
+alias hl="itomate -c  ~/.config/itomate/holistics.yml"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+function kill-hl() {
+    for port in 3000 3036 7004 3555 9777 6379; do 
+        kill $(lsof -ti:$port)
+    done
+}
+## fzf alias 
+### use fp to do a fzf search and preview the files
+alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+### search for a file with fzf and open it in vim
+alias vf='nvim $(fp)'
+# setup metabase
+alias metabase="java -jar metabase.jar"
+## dbt alias
+alias dbt_refresh='dbt clean ; dbt deps ; dbt seed'
+alias open_dbt_docs='dbt docs generate && dbt docs serve'
+## Tailscale
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+# Vim kebinding 
+bindkey -v
+export KEYTIMEOUT=1
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+if [[ ${KEYMAP} == vicmd ]] ||
+  [[ $1 = 'block' ]]; then
+  echo -ne '\e[1 q'
+elif [[ ${KEYMAP} == main ]] ||
+  [[ ${KEYMAP} == viins ]] ||
+  [[ ${KEYMAP} = '' ]] ||
+  [[ $1 = 'beam' ]]; then
+  echo -ne '\e[5 q'
+fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git 
   zsh-syntax-highlighting 
+  zsh-autosuggestions
   brew
   asdf
+  web-search
+  fzf-zsh-completions
+  # zsh-vi-mode
 )
-
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -131,9 +131,6 @@ if [ -f '/Users/soapycat/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/
 CFLAGS="-I$(brew --prefix openssl)/include" 
 LDFLAGS="-L$(brew --prefix openssl)/lib"
 
-# Homebrew on Apple Silicon
-path=('/opt/homebrew/bin' $path)
-export PATH 
 
 # /usr/local/bin/brew
 #Setup asdf
@@ -143,23 +140,32 @@ export PATH
 eval "$(direnv hook zsh)"
 
 #JAVA
-JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home"
+# JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home"
+# JAVA_HOME="/opt/homebrew/Cellar/openjdk/20.0.1/libexec/openjdk.jdk/Contents/Home"
+# JAVA_HOME="/opt/homebrew/Cellar/openjdk/11.0.20.1/libexec/openjdk.jdk/Contents/Home"
+JAVA_HOME="/Users/soapycat/.sdkman/candidates/java/17.0.8.1-tem"
 
 #java openjdk
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+# export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH=$JAVA_HOME/bin:$PATH
 
 
-#shortpath to dir by fzf
+## fzf config
+export FZF_COMPLETION_TRIGGER='*'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 function fwork(){
-  cd $({ find $HOME/Documents/Work/Holistics -maxdepth 1 -type d -print 2> /dev/null; } | fzf -q "$1")
+  cd $({ find $HOME/Documents/Work/Holistics -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
 }
 
 function fper(){
-  cd $({ find $HOME/Documents/Persona -maxdepth 1 -type d -print 2> /dev/null; } | fzf -q "$1")
+  cd $({ find $HOME/Documents/Persona -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
 }
 
-export FZF_COMPLETION_TRIGGER='*'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+function fwt() {
+  cd $({ find . -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
+}
+
 
 
 #reuse ssh passphrase
@@ -171,21 +177,95 @@ export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l > /dev/null || ssh-add
 
 
-# setup Poetry
-export PATH=$PATH:$HOME/.local/bin
-
 #setup fzf-dbt
 FZF_DBT_PATH=~/.fzf-dbt/fzf-dbt.sh
 if [[ ! -f /Users/soapycat/.fzf-dbt/fzf-dbt.sh ]]; then
-    FZF_DBT_DIR=/Users/soapycat/.fzf-dbt
-    print -P "%F{green}Installing fzf-dbt into /Users/soapycat/.fzf-dbt%f"
-    mkdir -p /Users/soapycat/.fzf-dbt
-    command curl -L https://raw.githubusercontent.com/Infused-Insight/fzf-dbt/main/src/fzf_dbt.sh > /Users/soapycat/.fzf-dbt/fzf-dbt.sh &&         print -P "%F{green}Installation successful.%f" ||         print -P "%F{red}The download has failed.%f"
+  FZF_DBT_DIR=/Users/soapycat/.fzf-dbt
+  print -P "%F{green}Installing fzf-dbt into /Users/soapycat/.fzf-dbt%f"
+  mkdir -p /Users/soapycat/.fzf-dbt
+  command curl -L https://raw.githubusercontent.com/Infused-Insight/fzf-dbt/main/src/fzf_dbt.sh > /Users/soapycat/.fzf-dbt/fzf-dbt.sh &&         print -P "%F{green}Installation successful.%f" ||         print -P "%F{red}The download has failed.%f"
 fi
 
 export FZF_DBT_PREVIEW_CMD="cat {}"
 export FZF_DBT_HEIGHT=80%
 source /Users/soapycat/.fzf-dbt/fzf-dbt.sh
 
-# setup metabase
-alias metabase="java -jar metabase.jar"
+
+# php
+export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
+
+
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+  tmp="$(mktemp)"
+  lf -last-dir-path="$tmp" "$@"
+  if [ -f "$tmp" ]; then
+    dir="$(cat "$tmp")"
+    rm -f "$tmp"
+    [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+  fi
+}
+bindkey -s '^o' 'lfcd\n'
+
+
+# Coursier scala
+export PATH="$PATH:/Users/soapycat/Library/Application Support/Coursier/bin"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+
+# dbt shortcut
+function dbt_run_changed() {
+  children=$1
+  models=$(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed "s/\.sql$/${children}/g" | tr '\n' ' ')
+  echo "Running models: ${models}"
+  dbt run --models $models
+}
+
+function cycle_logs() {
+  suffix=$(date '+%Y-%m-%dT%H:%M:%S')
+  mv -v logs/dbt.log logs/dbt.log.${suffix}
+}
+
+
+## IntellJ Launcher 
+export PATH="$PATH:/Applications/IntelliJ IDEA.app/Contents/MacOS"
+
+# solve compatitibly issue between zsh-vim and fzf 
+# https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
+## The plugin will auto execute this zvm_after_init function
+function zvm_after_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
+## The plugin will auto execute this zvm_after_lazy_keybindings function
+function zvm_after_lazy_keybindings() {
+  bindkey -M vicmd 's' your_normal_widget
+  bindkey -M visual 'n' your_visual_widget
+}
+
+## bigquery project
+export bq_stag=holistics-data-294707
+export bq_prod=skilled-fulcrum-90207
+
+## zsh-autosuggestions color
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=100'
+
+## Add MacPort to shell path
+export PATH="$PATH:/opt/local/bin"
+
+## Add Maven to shell path 
+export PATH=/usr/local/apache-maven-3.9.6/bin:$PATH
+### TODO: Add mvn setup to dotfile
+#
+
+# Add Rust app to PATH
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# Setuo Holistics
+## libssh and rugged 
+export LOCAL_DIR=/usr/local
+export PKG_CONFIG_PATH=$LOCAL_DIR/lib/pkgconfig
+export LD_LIBRARY_PATH=$LOCAL_DIR/lib
