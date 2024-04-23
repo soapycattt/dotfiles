@@ -1,3 +1,4 @@
+# --- ARCH CONFLICT ---
 # Use the homebrew version accodrding to the machine architecture
 ARCH=$(arch)
 if [[ ${ARCH} == "arm64" ]]
@@ -6,11 +7,17 @@ then
   HOMEBREW_PREFIX="/opt/homebrew"
   HOMEBREW_REPOSITORY="${HOMEBREW_PREFIX}"
   PATH='/opt/homebrew/bin':$PATH
+  
 else
   # On Intel macOS, this script installs to /usr/local only
   HOMEBREW_PREFIX="/usr/local"
   HOMEBREW_REPOSITORY="${HOMEBREW_PREFIX}/Homebrew"
   PATH='$HOMEBREW_REPOSITORY/bin':$PATH
+  # Neovim Data Dir
+  export XDG_DATA_HOME="$HOME/.local/intel/share"
+  export XDG_RUNTIME_DIR="/tmp/intel/nvim.user/xxx "
+  export XDG_STATE_HOME="$HOME/.local/intel/state"
+
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -25,76 +32,54 @@ autoload -U colors && colors
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-# export DBT_PROFILES_DIR=/Users/soapycat/Documents/Work/Holistics/dbt/profiles
-export DBT_PROFILES_DIR=~/.dbt
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# alias
+#  --- ALIAS ---
 alias gcloud="~/google-cloud-sdk/bin/gcloud"
-alias venv="source .venv/bin/activate"
 alias v=nvim
-alias src=source
-alias nvimhome="nvim ~/.config/nvim"
-alias hl="itomate -c  ~/.config/itomate/holistics.yml"
-
-
-function kill-hl() {
-    for port in 3000 3036 7004 3555 9777 6379; do 
-        kill $(lsof -ti:$port)
-    done
-}
-## fzf alias 
-### use fp to do a fzf search and preview the files
-alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-### search for a file with fzf and open it in vim
-alias vf='nvim $(fp)'
-# setup metabase
-alias metabase="java -jar metabase.jar"
-## dbt alias
-alias dbt_refresh='dbt clean ; dbt deps ; dbt seed'
-alias open_dbt_docs='dbt docs generate && dbt docs serve'
-## Tailscale
+alias vim=nvim
+alias nvimhome="nvim ~/dotfiles/nvim"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+alias metabase="java -jar metabase.jar"
+alias cat=bat
 
+alias venv="source .venv/bin/activate"
+alias src=source
 
-# Vim kebinding 
+# --- ENV VARIABLES ---
+export bq_stag=holistics-data-294707
+export bq_prod=skilled-fulcrum-90207
+
+# --- VIM KEYBIND --- 
 bindkey -v
 export KEYTIMEOUT=1
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
-if [[ ${KEYMAP} == vicmd ]] ||
-  [[ $1 = 'block' ]]; then
-  echo -ne '\e[1 q'
-elif [[ ${KEYMAP} == main ]] ||
-  [[ ${KEYMAP} == viins ]] ||
-  [[ ${KEYMAP} = '' ]] ||
-  [[ $1 = 'beam' ]]; then
-  echo -ne '\e[5 q'
-fi
+  if [[ ${KEYMAP} == vicmd ]] ||
+    [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+    [[ ${KEYMAP} == viins ]] ||
+    [[ ${KEYMAP} = '' ]] ||
+    [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
 }
+
+function zle-line-init() {
+  zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+  echo -ne "\e[5 q"
+}
+
 zle -N zle-keymap-select
-zle-line-init() {
-zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-echo -ne "\e[5 q"
-}
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
+
+# --- PLUGINS ---
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
@@ -104,12 +89,18 @@ plugins=(
   brew
   asdf
   web-search
-  fzf-zsh-completions
-  # zsh-vi-mode
+  forgit
 )
 
-source $ZSH/oh-my-zsh.sh
 
+# --- ZSH ---  
+export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# --- SSH --- 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -118,9 +109,17 @@ else
 fi
 
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Reuse ssh passphrase
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+  eval `ssh-agent`
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+ssh-add -l > /dev/null || ssh-add
 
+
+
+# -- GCLOUD ---
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/soapycat/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/soapycat/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -128,31 +127,18 @@ if [ -f '/Users/soapycat/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/soapyc
 if [ -f '/Users/soapycat/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/soapycat/google-cloud-sdk/completion.zsh.inc'; fi
 
 
-CFLAGS="-I$(brew --prefix openssl)/include" 
-LDFLAGS="-L$(brew --prefix openssl)/lib"
-
-
-# /usr/local/bin/brew
-#Setup asdf
-# . $HOME/.asdf/asdf.sh
-
-#Hook direnv
+# -- DIRENV ---
 eval "$(direnv hook zsh)"
 
-#JAVA
-# JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home"
-# JAVA_HOME="/opt/homebrew/Cellar/openjdk/20.0.1/libexec/openjdk.jdk/Contents/Home"
-# JAVA_HOME="/opt/homebrew/Cellar/openjdk/11.0.20.1/libexec/openjdk.jdk/Contents/Home"
-JAVA_HOME="/Users/soapycat/.sdkman/candidates/java/17.0.8.1-tem"
-
-#java openjdk
-# export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export PATH=$JAVA_HOME/bin:$PATH
 
 
-## fzf config
+
+##  --- FZF ---
 export FZF_COMPLETION_TRIGGER='*'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_COMMAND="fd --type file --color=always"
+export FZF_DEFAULT_OPTS="--ansi"
 
 function fwork(){
   cd $({ find $HOME/Documents/Work/Holistics -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
@@ -162,40 +148,18 @@ function fper(){
   cd $({ find $HOME/Documents/Persona -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
 }
 
+function fconf(){
+  cd $({ find $HOME/dotfiles -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
+}
+
 function fwt() {
   cd $({ find . -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
 }
 
+alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'" # use fp to do a fzf search and preview the files
+alias vf='nvim $(fp)' # search for a file with fzf and open it in vim
 
-
-#reuse ssh passphrase
-if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-  eval `ssh-agent`
-  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-fi
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-ssh-add -l > /dev/null || ssh-add
-
-
-#setup fzf-dbt
-FZF_DBT_PATH=~/.fzf-dbt/fzf-dbt.sh
-if [[ ! -f /Users/soapycat/.fzf-dbt/fzf-dbt.sh ]]; then
-  FZF_DBT_DIR=/Users/soapycat/.fzf-dbt
-  print -P "%F{green}Installing fzf-dbt into /Users/soapycat/.fzf-dbt%f"
-  mkdir -p /Users/soapycat/.fzf-dbt
-  command curl -L https://raw.githubusercontent.com/Infused-Insight/fzf-dbt/main/src/fzf_dbt.sh > /Users/soapycat/.fzf-dbt/fzf-dbt.sh &&         print -P "%F{green}Installation successful.%f" ||         print -P "%F{red}The download has failed.%f"
-fi
-
-export FZF_DBT_PREVIEW_CMD="cat {}"
-export FZF_DBT_HEIGHT=80%
-source /Users/soapycat/.fzf-dbt/fzf-dbt.sh
-
-
-# php
-export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
-export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
-
-
+# --- lf ---
 # Use lf to switch directories and bind it to ctrl-o
 lfcd () {
   tmp="$(mktemp)"
@@ -209,15 +173,18 @@ lfcd () {
 bindkey -s '^o' 'lfcd\n'
 
 
-# Coursier scala
+# --- SCALA ---
 export PATH="$PATH:/Users/soapycat/Library/Application Support/Coursier/bin"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 
-# dbt shortcut
+# --- DBT --- 
+alias dbt-docs='dbt docs generate && dbt docs serve'
+export DBT_PROFILES_DIR=~/.dbt
+
+## dbt shortcut
 function dbt_run_changed() {
   children=$1
   models=$(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed "s/\.sql$/${children}/g" | tr '\n' ' ')
@@ -231,41 +198,66 @@ function cycle_logs() {
 }
 
 
-## IntellJ Launcher 
-export PATH="$PATH:/Applications/IntelliJ IDEA.app/Contents/MacOS"
+## fzf-dbt
+FZF_DBT_PATH=~/.fzf-dbt/fzf-dbt.sh
+if [[ ! -f /Users/soapycat/.fzf-dbt/fzf-dbt.sh ]]; then
+  FZF_DBT_DIR=/Users/soapycat/.fzf-dbt
+  print -P "%F{green}Installing fzf-dbt into /Users/soapycat/.fzf-dbt%f"
+  mkdir -p /Users/soapycat/.fzf-dbt
+  command curl -L https://raw.githubusercontent.com/Infused-Insight/fzf-dbt/main/src/fzf_dbt.sh > /Users/soapycat/.fzf-dbt/fzf-dbt.sh &&         print -P "%F{green}Installation successful.%f" ||         print -P "%F{red}The download has failed.%f"
+fi
 
-# solve compatitibly issue between zsh-vim and fzf 
-# https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
-## The plugin will auto execute this zvm_after_init function
-function zvm_after_init() {
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-}
-## The plugin will auto execute this zvm_after_lazy_keybindings function
-function zvm_after_lazy_keybindings() {
-  bindkey -M vicmd 's' your_normal_widget
-  bindkey -M visual 'n' your_visual_widget
-}
+export FZF_DBT_PREVIEW_CMD="cat {}"
+export FZF_DBT_HEIGHT=80%
+source /Users/soapycat/.fzf-dbt/fzf-dbt.sh
 
-## bigquery project
-export bq_stag=holistics-data-294707
-export bq_prod=skilled-fulcrum-90207
+
+# --- PATH ---
+export PATH="$PATH:/Applications/IntelliJ IDEA.app/Contents/MacOS" # IntelliJ IDEA
+export PATH="$PATH:/opt/local/bin" # MacPort
+export PATH="$PATH:$HOME/.cargo/bin" # Rust
+export PATH=/usr/local/apache-maven-3.9.6/bin:$PATH # Maven  TODO: Add mvn setup to dotfile
+export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH" # PHP
+export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH" # PHP
+
+JAVA_HOME="/Users/soapycat/.sdkman/candidates/java/17.0.8.1-tem"
+export PATH=$JAVA_HOME/bin:$PATH # JAVA
+
 
 ## zsh-autosuggestions color
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=100'
 
-## Add MacPort to shell path
-export PATH="$PATH:/opt/local/bin"
 
-## Add Maven to shell path 
-export PATH=/usr/local/apache-maven-3.9.6/bin:$PATH
-### TODO: Add mvn setup to dotfile
-#
-
-# Add Rust app to PATH
-export PATH="$PATH:$HOME/.cargo/bin"
-
-# Setuo Holistics
+#  --- HOLISTICS ---
 ## libssh and rugged 
 export LOCAL_DIR=/usr/local
 export PKG_CONFIG_PATH=$LOCAL_DIR/lib/pkgconfig
 export LD_LIBRARY_PATH=$LOCAL_DIR/lib
+
+
+## Start Holistics 
+alias hl="itomate -c  ~/.config/itomate/holistics.yml"
+alias holistics="itomate -c  ~/.config/itomate/holistics.yml"
+
+## Terminate Holistics 
+function kill-hl() {
+    for port in 3000 3036 7004 3555 9777 6379; do 
+        kill $(lsof -ti:$port)
+    done
+}
+
+
+# --- TheFuck ---
+eval $(thefuck --alias)
+eval $(thefuck --alias fk)
+
+
+# --- ZSH Completions ---
+# https://github.com/zsh-users/zsh-autosuggestions/issues/532
+bindkey '^I'   complete-word       # tab          | complete
+bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
+# ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty bracketed-paste accept-line push-line-or-edit)
+# ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+fpath+=${ZDOTDIR:-~}/.zsh_functions
