@@ -42,10 +42,15 @@ alias vim=nvim
 alias nvimhome="nvim ~/dotfiles/nvim"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias metabase="java -jar metabase.jar"
+alias rcat=cat
 alias cat=bat
 
 alias venv="source .venv/bin/activate"
 alias src=source
+
+## Switch between intel and arm64
+alias intel="arch -x86_64 zsh"
+alias arm64="arch -arm64 zsh"
 
 # --- ENV VARIABLES ---
 export bq_stag=holistics-data-294707
@@ -249,6 +254,11 @@ function kill-hl() {
     done
 }
 
+## Holistics Docs 
+export ZSH_WEB_SEARCH_ENGINES=(
+  hl-docs "https://docs.holistics.io/search?q="
+)
+alias hl-docs="web_search hl-docs"
 
 # --- TheFuck ---
 eval $(thefuck --alias)
