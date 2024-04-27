@@ -51,33 +51,6 @@ alias src=source
 export bq_stag=holistics-data-294707
 export bq_prod=skilled-fulcrum-90207
 
-# --- VIM KEYBIND --- 
-bindkey -v
-export KEYTIMEOUT=1
-
-# Change cursor shape for different vi modes.
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-    [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-    [[ ${KEYMAP} == viins ]] ||
-    [[ ${KEYMAP} = '' ]] ||
-    [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
-
-function zle-line-init() {
-  zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-  echo -ne "\e[5 q"
-}
-
-zle -N zle-keymap-select
-zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-
 
 # --- PLUGINS ---
 # Standard plugins can be found in $ZSH/plugins/
@@ -119,6 +92,34 @@ ssh-add -l > /dev/null || ssh-add
 
 
 
+# --- VIM KEYBIND --- 
+bindkey -v
+export KEYTIMEOUT=1
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+    [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+    [[ ${KEYMAP} == viins ]] ||
+    [[ ${KEYMAP} = '' ]] ||
+    [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+
+function zle-line-init() {
+  zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+  echo -ne "\e[5 q"
+}
+
+zle -N zle-keymap-select
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+
 # -- GCLOUD ---
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/soapycat/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/soapycat/google-cloud-sdk/path.zsh.inc'; fi
@@ -129,8 +130,6 @@ if [ -f '/Users/soapycat/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/
 
 # -- DIRENV ---
 eval "$(direnv hook zsh)"
-
-
 
 
 ##  --- FZF ---
@@ -148,8 +147,12 @@ function fper(){
   cd $({ find $HOME/Documents/Persona -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
 }
 
-function fconf(){
+function fdot(){
   cd $({ find $HOME/dotfiles -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
+}
+
+function fconf(){
+  cd $({ find $HOME/.config -maxdepth 1 -type d -print 2> /dev/null; } | fzf -q "$1")
 }
 
 function fwt() {
@@ -254,10 +257,25 @@ eval $(thefuck --alias fk)
 
 # --- ZSH Completions ---
 # https://github.com/zsh-users/zsh-autosuggestions/issues/532
-bindkey '^I'   complete-word       # tab          | complete
+# bindkey '^I'   complete-word       # tab          | complete
 bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
 # ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty bracketed-paste accept-line push-line-or-edit)
 # ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+
+# --- ANACONDA ---
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
