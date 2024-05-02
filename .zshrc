@@ -43,7 +43,10 @@ alias nvimhome="nvim ~/dotfiles/nvim"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias metabase="java -jar metabase.jar"
 alias rcat=cat
+alias rls=ls 
+
 alias cat=bat
+alias ls=eza
 
 alias venv="source .venv/bin/activate"
 alias src=source
