@@ -5,3 +5,11 @@ vim.opt.wrap = true
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldenable = false
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+})
