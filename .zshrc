@@ -42,9 +42,11 @@ alias vim=nvim
 alias nvimhome="nvim ~/dotfiles/nvim"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias metabase="java -jar metabase.jar"
+alias rcd=cd
 alias rcat=cat
 alias rls=ls 
 
+alias cd=z
 alias cat=bat
 alias ls=eza
 
@@ -54,6 +56,10 @@ alias src=source
 ## Switch between intel and arm64
 alias intel="arch -x86_64 zsh"
 alias arm64="arch -arm64 zsh"
+
+## Quick access
+alias p-prefect="ping -c 3 prefect.holistics.dev"
+alias ssh-prefect="ssh root@internal-prefect2"
 
 # --- ENV VARIABLES ---
 export bq_stag=holistics-data-294707
@@ -149,22 +155,27 @@ export FZF_DEFAULT_OPTS="--ansi"
 
 function fwork(){
   cd $({ find $HOME/Documents/Work/Holistics -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
+  # cd $(fd . $HOME/Documents/Work/Holistics --hidden -d 2 | 2> /dev/null | fzf)
 }
 
 function fper(){
   cd $({ find $HOME/Documents/Persona -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
+  # cd $(fd . $HOME/Documents/Persona --hidden -d 2 | 2> /dev/null | fzf)
 }
 
 function fdot(){
-  cd $({ find $HOME/dotfiles -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
+  vim $(fd . ~/dotfiles --hidden -d 1 | 2> /dev/null | fzf -q "$1")
+
 }
 
 function fconf(){
-  cd $({ find $HOME/.config -maxdepth 1 -type d -print 2> /dev/null; } | fzf -q "$1")
+  # cd $({ find $HOME/.config -maxdepth 1 -type d -print 2> /dev/null; } | fzf -q "$1")
+  cd $(fd . ~/.config --hidden -d 1 | 2> /dev/null | fzf)
 }
 
 function fwt() {
-  cd $({ find . -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
+  cd $(fd --hidden -d 2 | 2> /dev/null | fzf)
+  # cd $({ find . -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
 }
 
 alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'" # use fp to do a fzf search and preview the files
@@ -172,7 +183,7 @@ alias vf='nvim $(fp)' # search for a file with fzf and open it in vim
 
 # --- lf ---
 # Use lf to switch directories and bind it to ctrl-o
-lfcd () {
+function lfcd () {
   tmp="$(mktemp)"
   lf -last-dir-path="$tmp" "$@"
   if [ -f "$tmp" ]; then
@@ -266,6 +277,9 @@ alias hl-docs="web_search hl-docs"
 # --- TheFuck ---
 eval $(thefuck --alias)
 eval $(thefuck --alias fk)
+
+# -- ZOXIDE ---
+eval "$(zoxide init zsh)"
 
 
 # --- ZSH Completions ---
