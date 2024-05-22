@@ -1,1 +1,1 @@
-return { 'mg9797/vim-visual-multi' }
+return { 'mg979/vim-visual-multi' }
