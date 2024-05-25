@@ -1,11 +1,11 @@
 return {
   {
-    'stevearc/aerial.nvim',
+    "stevearc/aerial.nvim",
     opts = {},
     -- Optional dependencies
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
+      "nvim-tree/nvim-web-devicons",
     },
 
     config = function()
@@ -19,6 +19,6 @@ return {
       })
       -- You probably also want to set a keymap to toggle aerial
       vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
-    end
-  }
+    end,
+  },
 }
