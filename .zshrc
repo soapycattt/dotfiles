@@ -42,6 +42,9 @@ alias vim=nvim
 alias nvimhome="nvim ~/dotfiles/nvim"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias metabase="java -jar metabase.jar"
+alias sql='nvim -c "DBUI"'
+alias leetcode='nvim leetcode.nvim'
+
 alias rcd=cd
 alias rcat=cat
 alias rls=ls 
@@ -51,7 +54,8 @@ alias cat=bat
 alias ls=eza
 
 alias venv="source .venv/bin/activate"
-alias src=source
+alias zshrc="nvim ~/.zshrc"
+alias src="source ~/.zshrc"
 
 ## Switch between intel and arm64
 alias intel="arch -x86_64 zsh"
