@@ -1,6 +1,24 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    init = function()
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      -- Toggle Diagnostics
+      -- Ref: https://samuellawrentz.com/hacks/neovim/disable-annoying-eslint-lsp-server-and-hide-virtual-text/
+      -- Ref: https://www.reddit.com/r/neovim/comments/17mpken/remapping_lazyvim_keybindings/
+      local isLspDiagnosticsVisible = true
+      keys[#keys + 1] = {
+        "<leader>tl",
+        function()
+          isLspDiagnosticsVisible = not isLspDiagnosticsVisible
+          vim.diagnostic.config({
+            virtual_text = isLspDiagnosticsVisible,
+            underline = isLspDiagnosticsVisible,
+          })
+        end,
+        desc = "[T]oggle LSP Diagnostics",
+      }
+    end,
   },
   { "tpope/vim-rails" },
   -- lspconfig
@@ -9,10 +27,10 @@ return {
     event = "BufReadPre",
     format_on_save = function(bufnr)
       -- Disable autoformat on certain filetypes
-      -- local ignore_filetypes = { "javascript", "typescript", "vue", "ruby", "markdown", "dockerfile" }
-      -- if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
-      --   return
-      -- end
+      local ignore_filetypes = { "vue", "python", "ruby" }
+      if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+        return
+      end
 
       -- Disable with a global or buffer-local variable
       if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
