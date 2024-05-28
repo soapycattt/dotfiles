@@ -29,12 +29,12 @@ return {
       vim.g.nvim_ghost_server_port = 4001
     end,
   },
-  {
-    "3rd/image.nvim",
-    config = function()
-      require("image").setup()
-    end,
-  },
+  -- {
+  --   "3rd/image.nvim",
+  --   config = function()
+  --     require("image").setup()
+  --   end,
+  -- },
   {
     "kawre/leetcode.nvim",
     build = ":TSUpdate html",
@@ -47,7 +47,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "rcarriga/nvim-notify",
       "nvim-tree/nvim-web-devicons",
-      "3rd/image.nvim",
+      -- "3rd/image.nvim",
     },
     opts = {
       lang = "python",
