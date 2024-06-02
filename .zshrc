@@ -296,7 +296,8 @@ bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
 # ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
-
+fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.4.1/contrib/zsh $fpath) # Vagrant command completion
+compinit
 
 # --- ANACONDA ---
 __conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -310,4 +311,3 @@ else
     fi
 fi
 unset __conda_setup
-
