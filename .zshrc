@@ -262,14 +262,15 @@ export LD_LIBRARY_PATH=$LOCAL_DIR/lib
 
 
 ## Start Holistics 
-alias hl="itomate -c  ~/.config/itomate/holistics.yml"
-alias holistics="itomate -c  ~/.config/itomate/holistics.yml"
+alias hl="tmuxinator start holistics"
+alias holistics="tmuxinator start holistics"
 
 ## Terminate Holistics 
 function kill-hl() {
     for port in 3000 3036 7004 3555 9777 6379; do 
         kill $(lsof -ti:$port)
     done
+    tmux kill-session -t holistics
 }
 
 ## Holistics Docs 
