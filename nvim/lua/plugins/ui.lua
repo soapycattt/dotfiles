@@ -77,10 +77,9 @@ return {
       local opts = {
         left = {
           {
-            ft = "nvim-tree",
+            ft = "minifiles",
             pinned = true,
             size = { width = 1.0 },
-            open = "NvimTreeOpen",
             title = "Explorer",
             filter = function(buf, win)
               return vim.api.nvim_win_get_config(win).relative == ""
