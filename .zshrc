@@ -1,4 +1,3 @@
-# My ZSH
 # --- ARCH CONFLICT ---
 # Use the homebrew version accodrding to the machine architecture
 ARCH=$(arch)
@@ -273,6 +272,7 @@ function kill-hl() {
     done
     tmux kill-session -t holistics
 }
+alias kill-holistics=kill-hl
 
 ## Holistics Docs 
 export ZSH_WEB_SEARCH_ENGINES=(
