@@ -8,8 +8,6 @@ return {
       local gitsigns = require("gitsigns")
       gitsigns.setup()
 
-      require("scrollbar.handlers.gitsigns").setup()
-
       local keymap = vim.keymap -- for conciseness
       keymap.set("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>")
       keymap.set("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>")

@@ -1,3 +1,4 @@
+# My ZSH
 # --- ARCH CONFLICT ---
 # Use the homebrew version accodrding to the machine architecture
 ARCH=$(arch)

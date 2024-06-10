@@ -18,7 +18,18 @@ return {
         end,
       })
       -- You probably also want to set a keymap to toggle aerial
-      vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+      vim.keymap.set("n", "<leader>oa", "<cmd>AerialToggle!<CR>")
+    end,
+  },
+  {
+    "echasnovski/mini.map",
+    version = "false",
+    opts = {
+      integrations = nil,
+    },
+    config = function()
+      require("mini.map").setup()
+      vim.keymap.set("n", "<Leader>om", MiniMap.toggle)
     end,
   },
 }
