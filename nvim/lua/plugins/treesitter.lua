@@ -10,6 +10,7 @@ return {
       "sql",
       "yaml",
       "lua",
+      "terraform",
     })
   end,
 }

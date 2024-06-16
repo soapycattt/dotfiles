@@ -11,26 +11,27 @@ vim.keymap.set("n", "+", "<cmd>resize -2<CR>")
 -- Split panes
 vim.keymap.set("n", "<C-w>h", "<cmd>split<CR>") --split vertically
 
-
 -- Copy current filepath to clipboard
-vim.keymap.set('n', '<leader>cbr', function() vim.fn.setreg('+', vim.fn.expand('%:p:.')) end,
-  { noremap = true, silent = true, desc = "[C]lip[B]oard [R]elative Path" })
+vim.keymap.set("n", "<leader>cbr", function()
+  vim.fn.setreg("+", vim.fn.expand("%:p:."))
+end, { noremap = true, silent = true, desc = "[C]lip[B]oard [R]elative Path" })
 
-vim.keymap.set('n', '<leader>cba', function()
-  local abs_file_path = vim.fn.expand('%:p:h') .. '/' .. vim.fn.expand('%:t')
-  vim.fn.setreg('+', abs_file_path)
+vim.keymap.set("n", "<leader>cba", function()
+  local abs_file_path = vim.fn.expand("%:p:h") .. "/" .. vim.fn.expand("%:t")
+  vim.fn.setreg("+", abs_file_path)
 end, { noremap = true, silent = true, desc = "[C]lip[B]oard [A]bsolute Path" })
 
-vim.keymap.set('n', '<leader>cbc', function() vim.fn.setreg('+', vim.fn.getcwd()) end,
-  { noremap = true, silent = true, desc = "[C]lip[B]oard [C]urrent Working Directory" })
+vim.keymap.set("n", "<leader>cbc", function()
+  vim.fn.setreg("+", vim.fn.getcwd())
+end, { noremap = true, silent = true, desc = "[C]lip[B]oard [C]urrent Working Directory" })
 
-vim.keymap.set('n', '<leader>cbd', function() vim.fn.setreg('+', vim.fn.expand('%:h')) end,
-  { noremap = true, silent = true, desc = "[C]lip[B]oard [D]irectory" })
+vim.keymap.set("n", "<leader>cbd", function()
+  vim.fn.setreg("+", vim.fn.expand("%:h"))
+end, { noremap = true, silent = true, desc = "[C]lip[B]oard [D]irectory" })
 
-vim.keymap.set('n', '<leader>cbf', function() vim.fn.setreg('+', vim.fn.expand('%:t:r')) end,
-  { noremap = true, silent = true, desc = "[C]lip[B]oard [F]ilename" })
+vim.keymap.set("n", "<leader>cbf", function()
+  vim.fn.setreg("+", vim.fn.expand("%:t:r"))
+end, { noremap = true, silent = true, desc = "[C]lip[B]oard [F]ilename" })
 
-
--- ['<localleader>yp'] = { function() vim.fn.setreg('+', vim.fn.expand('%:p:.')) end, desc = 'Copy file path' },
--- ['<localleader>yd'] = { function() vim.fn.setreg('+', vim.fn.expand('%:h')) end, desc = 'Copy directory path' },
--- ['<localleader>yf'] = { function() vim.fn.setreg('+', vim.fn.expand('%:t:r')) end, desc = 'Copy file name' },
+-- Quick access
+vim.keymap.set("n", "<leader>oz", "<cmd>edit ~/.zshrc<cr>", { desc = "Open .zshrc" })
