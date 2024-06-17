@@ -44,6 +44,7 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias metabase="java -jar metabase.jar"
 alias sql='nvim -c "DBUI"'
 alias leetcode='nvim leetcode.nvim'
+alias lg=lazygit
 
 alias rcd=cd
 alias rcat=cat
@@ -64,6 +65,7 @@ alias arm64="arch -arm64 zsh"
 ## Quick access
 alias p-prefect="ping -c 3 prefect.holistics.dev"
 alias ssh-prefect="ssh root@internal-prefect2"
+alias start-yabai="yabai --start-service && skhd --start-service"
 
 # --- ENV VARIABLES ---
 export bq_stag=holistics-data-294707

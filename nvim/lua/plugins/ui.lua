@@ -87,16 +87,16 @@ return {
           },
         },
         right = {
-          {
-            ft = "aerial",
-            pinned = true,
-            open = "AerialOpen",
-            title = "Outline",
-            size = { width = 1.0 },
-            filter = function(buf, win)
-              return vim.api.nvim_win_get_config(win).relative == ""
-            end,
-          },
+          -- {
+          --   ft = "aerial",
+          --   pinned = true,
+          --   open = "AerialOpen",
+          --   title = "Outline",
+          --   size = { width = 1.0 },
+          --   filter = function(buf, win)
+          --     return vim.api.nvim_win_get_config(win).relative == ""
+          --   end,
+          -- },
           {
             ft = "mini.map",
             pinned = true,
