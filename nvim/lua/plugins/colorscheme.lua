@@ -1,22 +1,24 @@
--- Grubox
--- return {
---   {
---     'ellisonleao/gruvbox.nvim',
---     opts = {
---       transparent_mode = true,
---     },
---   },
---   -- Configure LazyVim to load gruvbox
---   {
---     'LazyVim/LazyVim',
---     opts = {
---       colorscheme = 'gruvbox',
---     },
---   },
--- }
+function toggle_transparent(scheme)
+  vim.keymap.set("n", "<leader>tt", function()
+    local colorscheme = require(scheme)
+    if colorscheme == "catppuccin" then
+      colorscheme.options.transparent_background = not colorscheme.options.transparent_background
+      colorscheme.compile()
+    elseif colorscheme == "gruvbox" then
+      colorscheme.options.transparent_mode = not colorscheme.options.transparent_mode
+    end
 
--- Catpuccin
+    vim.cmd.colorscheme(vim.g.colors_name)
+  end, { desc = "[T]oggle [T]ransparent Background" })
+end
+
 return {
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin",
+    },
+  },
   {
     "catppuccin",
     opts = {
@@ -33,9 +35,12 @@ return {
     end,
   },
   {
-    "LazyVim/LazyVim",
+    "ellisonleao/gruvbox.nvim",
     opts = {
-      colorscheme = "catppuccin",
+      transparent_mode = true,
     },
+    config = function()
+      toggle_transparent("gruvbox")
+    end,
   },
 }
