@@ -11,7 +11,7 @@ alt - l : yabai -m window --focus east
 ctrl + alt - return : yabai -m window --toggle zoom-fullscreen
 
 # balance out tree of windows (resize to occupy same area)
-cltr + alt - b : yabai -m space --balance
+ctrl + alt - b : yabai -m space --balance
 
 # -- Moving Windows Around --
 
@@ -22,7 +22,7 @@ ctrl + alt - h : yabai -m window --swap west
 ctrl + alt - l : yabai -m window --swap east
 
 # move window to prev and next space
-ctrl + alt - p : yabai -m window --space prev;
+ctrl + alt - b : yabai -m window --space prev;
 ctrl + alt - n : yabai -m window --space next;
 
 # move window to space #
