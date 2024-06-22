@@ -1,0 +1,115 @@
+# ------------------------------VIM KEYBIND-----------------------------
+# Change cursor shape for different vi modes.
+export KEYTIMEOUT=1
+function zle-keymap-select {
+	if [[ ${KEYMAP} == vicmd ]] ||
+		[[ $1 = 'block' ]]; then
+		echo -ne '\e[1 q'
+	elif [[ ${KEYMAP} == main ]] ||
+		[[ ${KEYMAP} == viins ]] ||
+		[[ ${KEYMAP} = '' ]] ||
+		[[ $1 = 'beam' ]]; then
+		echo -ne '\e[5 q'
+	fi
+}
+
+function zle-line-init() {
+	# zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+	echo -ne "\e[5 q"
+}
+
+zle -N zle-keymap-select
+zle -N zle-line-init
+echo -ne '\e[5 q'                # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q'; } # Use beam shape cursor for each new prompt.
+
+# ------------------------------FZF-------------------------------------
+function fwork() {
+	cd $({ find $HOME/Documents/Work/Holistics -maxdepth 2 -type d -print 2>/dev/null; } | fzf -q "$1")
+	# cd $(fd . $HOME/Documents/Work/Holistics --hidden -d 2 | 2> /dev/null | fzf)
+}
+
+function fper() {
+	cd $({ find $HOME/Documents/Persona -maxdepth 2 -type d -print 2>/dev/null; } | fzf -q "$1")
+	# cd $(fd . $HOME/Documents/Persona --hidden -d 2 | 2> /dev/null | fzf)
+}
+
+function fdot() {
+	vim $(fd . ~/dotfiles --hidden -d 1 | 2>/dev/null | fzf -q "$1")
+
+}
+
+function fconf() {
+	# cd $({ find $HOME/.config -maxdepth 1 -type d -print 2> /dev/null; } | fzf -q "$1")
+	cd $(fd . ~/.config --hidden -d 1 | 2>/dev/null | fzf)
+}
+
+function fwt() {
+	cd $(fd --hidden -d 2 | 2>/dev/null | fzf)
+	# cd $({ find . -maxdepth 2 -type d -print 2> /dev/null; } | fzf -q "$1")
+}
+
+function hist() {
+	history -r 0 | fzf-tmux -p -w 70% -y S | sed -E 's/^[ ]*[0-9]+\*?[ ]+//'
+}
+
+function _send_cmd() {
+	# Get result from fzf history and send key to previous pane, then close the scratch popup
+	# Return if tmux not running
+	tmux_running=$(pgrep tmux)
+	if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+		echo "tmux needs to be running"
+		exit 1
+	fi
+
+	last_session=$(
+		tmux list-sessions -F "#{session_name} #{session_attached} #{session_activity}" |
+			sort -k3 -n |
+			head -n 1 |
+			awk '{print $1}'
+	)
+
+	# Fzf command history
+	search_result=$(hist)
+
+	# Send keys to the last session
+	if [[ -n $search_result ]]; then
+		tmux send-keys -t "$last_session" "$search_result"
+		tmux detach-client
+	fi
+}
+
+# ------------------------------NAVIGATION------------------------------
+# Use lf to switch directories 
+function lfcd() {
+	tmp="$(mktemp)"
+	lf -last-dir-path="$tmp" "$@"
+	if [ -f "$tmp" ]; then
+		dir="$(cat "$tmp")"
+		rm -f "$tmp"
+		[ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+	fi
+}
+
+# ----------------------------------DBT----------------------------------
+function dbt_run_changed() {
+	children=$1
+	models=$(git diff --name-only | grep '\.sql$' | awk -F '/' '{ print $NF }' | sed "s/\.sql$/${children}/g" | tr '\n' ' ')
+	echo "Running models: ${models}"
+	dbt run --models $models
+}
+
+function cycle_logs() {
+	suffix=$(date '+%Y-%m-%dT%H:%M:%S')
+	mv -v logs/dbt.log logs/dbt.log.${suffix}
+}
+
+# ------------------------------HOLISTICS-------------------------------
+
+# Terminate Holistics
+function kill-hl() {
+	for port in 3000 3036 7004 3555 9777 6379; do
+		kill $(lsof -ti:$port)
+	done
+	tmux kill-session -t holistics
+}
