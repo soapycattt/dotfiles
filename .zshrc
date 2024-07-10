@@ -38,7 +38,6 @@ autoload -U colors && colors
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-
 # --- PLUGINS ---
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -62,9 +61,3 @@ dotfiles=(
 for file in "${dotfiles[@]}"; do
   source "$HOME/dotfiles/$file"
 done
-
-
-# bindkey
-bindkey -v # vim mode
-bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
-bindkey -s '^o' 'lfcd\n' # ctrl + o | lfcd

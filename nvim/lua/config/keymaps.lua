@@ -1,6 +1,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+-- Navigate
+-- vim.keymap.set("n", "j", "jzz", { remap = true })
+-- vim.keymap.set("n", "k", "kzz", { remap = true })
 
 -- Resize panes
 vim.keymap.set("n", "<Left>", ":vertical resize +2<CR>", { remap = true })
