@@ -27,7 +27,7 @@ return {
     event = "BufReadPre",
     format_on_save = function(bufnr)
       -- Disable autoformat on certain filetypes
-      local ignore_filetypes = { "vue", "python", "ruby" }
+      local ignore_filetypes = { "vue", "python", "ruby", "bash" }
       if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
         return
       end
