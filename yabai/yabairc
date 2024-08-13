@@ -13,8 +13,6 @@ yabai -m config right_padding 12
 yabai -m config window_gap 12
 
 # -- mouse settings --
-
-
 yabai -m config mouse_follows_focus on # center mouse on window with focus
 yabai -m config mouse_modifier alt # modifier for clicking and dragging with mouse
 yabai -m config mouse_action1 move # set modifier + left-click drag to move window
@@ -27,6 +25,10 @@ yabai -m mouse_drop_action swap
 
 # disable specific apps
 yabai -m rule --add title='^ Preferences$' manage=off
+yabai -m rule --add title='^ Settings$' manage=off
+yabai -m rule --add title='^ChatGPT$' manage=off
+yabai -m rule --add app='^ Settings$' manage=off
+yabai -m rule --add app='^ Preferences$' manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^iTerm$" manage=off
 yabai -m rule --add app="^iTerm2$" manage=off

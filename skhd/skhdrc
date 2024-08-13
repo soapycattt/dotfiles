@@ -1,47 +1,25 @@
+# -- Service management --
+# reload service
+ctrl + alt + cmd - r : \
+  osascript -e 'display notification "Reloaded yabai, skhd && hammerspoon!" with title "skhd" sound name "Frog"'\
+  && yabai --reload\
+  && skhd --stop-service\
+  && skhd --start-service\
+  && hs -c "hs.reload()"
+
+
 # -- Changing Window Focus --
-# Focus south direction
-ctrl + alt + cmd - j : \
-  if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "float" ] || \
-     [ "$(yabai -m query --windows --window | jq -r '.is-floating')" = "true" ]; then \
-    ~/.config/skhd/yabai-focus.sh south; \
-  else \
-    yabai -m window --focus south; \
-  fi
-
-# Focus north direction
-ctrl + alt + cmd - k : \
-  if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "float" ] || \
-     [ "$(yabai -m query --windows --window | jq -r '.is-floating')" = "true" ]; then \
-    ~/.config/skhd/yabai-focus.sh north; \
-  else \
-    yabai -m window --focus north; \
-  fi
-
-# Focus west direction
-ctrl + alt + cmd - h : \
-  if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "float" ] || \
-     [ "$(yabai -m query --windows --window | jq -r '.is-floating')" = "true" ]; then \
-    ~/.config/skhd/yabai-focus.sh west; \
-  else \
-    yabai -m window --focus west; \
-  fi
-
-# Focus east direction
-ctrl + alt + cmd - l : \
-  if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "float" ] || \
-     [ "$(yabai -m query --windows --window | jq -r '.is-floating')" = "true" ]; then \
-    ~/.config/skhd/yabai-focus.sh east; \
-  else \
-    yabai -m window --focus east; \
-  fi
-
+ctrl + alt + cmd - h : ~/.config/skhd/yabai-focus.sh west
+ctrl + alt + cmd - j : ~/.config/skhd/yabai-focus.sh south
+ctrl + alt + cmd - k : ~/.config/skhd/yabai-focus.sh north
+ctrl + alt + cmd - l : ~/.config/skhd/yabai-focus.sh east
 # Focus current cursor
 ctrl + alt + cmd - m : yabai -m window --focus mouse
 
 # -- Toggle -- 
 ctrl + alt - t : yabai -m window --toggle float
 ctrl + alt - s : yabai -m window --toggle split
-ctrl + alt - 0x32 : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
+ctrl + alt - 0x32 : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end') # 0x32 = backtick 
 # ctrl + alt - s : yabai -m window --toggle sticky # Need SIP disabled
 
 # rotate layout clockwise
@@ -60,7 +38,9 @@ ctrl + alt - space : yabai -m space --rotate 270
 
 # -- Modifying Window Size --
 # maximize a window
-ctrl + alt - return : if [ "$(yabai -m query --spaces --space | jq -r '."type"')" = "float" ] || [ "$(yabai -m query --windows --window | jq -r '."is-floating"')" = "true" ]; then \
+ctrl + alt - return : \
+  if [[ "$(yabai -m query --spaces --space | jq -r '.type')" == "float" ]] || \
+     [[ "$(yabai -m query --windows --window | jq -r '."is-floating"')" == "true" ]]; then \
   yabai -m window --grid 1:1:0:0:1:1; \
 else \
   yabai -m window --toggle zoom-fullscreen; \
@@ -79,7 +59,7 @@ ctrl + alt + cmd - right : yabai -m window east --resize left:40:0 2> /dev/null 
 ctrl + alt - u      : yabai -m window --grid 2:2:0:0:1:1
 ctrl + alt - i      : yabai -m window --grid 2:2:1:0:1:1
 ctrl + alt - m      : yabai -m window --grid 2:2:0:1:1:1
-ctrl + alt - 0x2B   : yabai -m window --grid 2:2:1:1:1:1
+ctrl + alt - 0x2B   : yabai -m window --grid 2:2:1:1:1:1 # 0x2b = "," sign
 #  2/3 screen
 ctrl + alt - e      : yabai -m window --grid 1:3:0:0:2:1
 ctrl + alt - r      : yabai -m window --grid 1:3:1:0:2:1
@@ -125,4 +105,25 @@ ctrl + alt - 4 : yabai -m window --space 4;
 ctrl + alt - 5 : yabai -m window --space 5;
 ctrl + alt - 6 : yabai -m window --space 6;
 ctrl + alt - 7 : yabai -m window --space 7;
+
+
+# Hotkey to open app
+ctrl - return : ~/.config/skhd/toggle-app.sh Alacritty
+ctrl + cmd - a      : ~/.config/skhd/toggle-app.sh Asana
+ctrl + cmd - b      : ~/.config/skhd/toggle-app.sh Arc
+ctrl + cmd - g      : ~/.config/skhd/toggle-app.sh ChatGPT
+ctrl + cmd - i      : ~/.config/skhd/toggle-app.sh Messages
+ctrl + cmd - m      : ~/.config/skhd/toggle-app.sh Messenger
+ctrl + cmd - n      : ~/.config/skhd/toggle-app.sh Notion
+ctrl + cmd - o      : ~/.config/skhd/toggle-app.sh Obsidian
+ctrl + cmd - s      : ~/.config/skhd/toggle-app.sh Slack
+ctrl + cmd - z      : ~/.config/skhd/toggle-app.sh Zalo
+
+shift + cmd - c     : open raycast://extensions/raycast/clipboard-history/clipboard-history
+shift + cmd - d     : open raycast://extensions/raycast/dictionary/define-word
+shift + cmd - m     : open raycast://extensions/ratoru/google-maps-search/travelTo
+shift + cmd - e     : open raycast://extensions/raycast/emoji-symbols/search-emoji-symbols
+shift + cmd - f     : open raycast://extensions/raycast/file-search/search-files
+
+
 
