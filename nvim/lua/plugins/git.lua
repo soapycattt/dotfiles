@@ -37,4 +37,11 @@ return {
     end,
   },
   { "sindrets/diffview.nvim", event = "LazyFile" },
+  {
+    "ruifm/gitlinker.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    init = function()
+      require("gitlinker").setup()
+    end,
+  },
 }

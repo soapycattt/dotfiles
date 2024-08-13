@@ -39,6 +39,21 @@ return {
 
       return { timeout_ms = 500, lsp_fallback = false }
     end,
+    opts = function(_, opts)
+      -- Setup SQLFluff formatter for SQL filetypes
+      opts.formatters.sqlfluff = {
+        args = { "format", "--dialect=ansi", "-" },
+      }
+
+      -- Define the SQL filetypes to apply SQLFluff
+      local sql_ft = { "sql", "mysql", "plsql" } -- Add your desired SQL filetypes here
+
+      -- Associate SQLFluff with the defined SQL filetypes
+      for _, ft in ipairs(sql_ft) do
+        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
+        table.insert(opts.formatters_by_ft[ft], "sqlfluff")
+      end
+    end,
   },
   -- cmdline tools and lsp servers
   {

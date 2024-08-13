@@ -16,12 +16,21 @@ return {
 
     -- see below for full list of optional dependencies 👇
   },
+  cmd = {
+    "ObsidianNew",
+    "ObsidianNewFromTemplate",
+  },
   opts = {
     workspaces = {
       {
         name = "vault",
         path = "~/Documents/Persona/Obsidian",
       },
+    },
+    templates = {
+      folder = "~/Documents/Persona/Obsidian/template",
+      date_format = "%Y-%m-%d-%a",
+      time_format = "%H:%M",
     },
   },
 }
