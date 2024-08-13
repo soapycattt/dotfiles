@@ -9,6 +9,8 @@ bindkey -v # vim mode
 bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
 bindkey -s '^o' 'lfcd\n' # ctrl + o | lfcd
 
+# forgit - interactive git fzf 
+[ -f $HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh ] && source $HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh
 
 # -- GCLOUD ---
 # The next line updates PATH for the Google Cloud SDK.

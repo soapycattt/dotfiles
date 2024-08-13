@@ -33,7 +33,8 @@ alias start-yabai="yabai --start-service && skhd --start-service"
 
 ## Holistics
 alias hl="tmuxinator start holistics"
-alias holistics="tmuxinator start holistics"
+alias hcli=holistics
+# alias holistics="tmuxinator start holistics"
 alias kill-holistics=kill-hl
 alias hl-docs="web_search hl-docs"
 
