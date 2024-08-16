@@ -1,3 +1,6 @@
+# prevent simple-bar freezing upon yabai restart,
+osascript -e 'tell application id "tracesOf.Uebersicht" to refresh'
+
 # default layout (can be bsp, stack or float)
 yabai -m config layout bsp
 yabai -m config --space 1 layout float
@@ -7,7 +10,7 @@ yabai -m config --space 2 layout float
 yabai -m config window_placement second_child
 
 # padding set to 12px
-yabai -m config top_padding 12
+yabai -m config top_padding 40
 yabai -m config bottom_padding 12
 yabai -m config left_padding 12
 yabai -m config right_padding 12
