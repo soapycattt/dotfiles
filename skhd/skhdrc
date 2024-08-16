@@ -109,21 +109,18 @@ ctrl + alt - 7 : yabai -m window --space 7;
 
 # Hotkey to open app
 ctrl - return : ~/.config/skhd/toggle-app.sh Alacritty
-ctrl + cmd - a      : ~/.config/skhd/toggle-app.sh Asana
-ctrl + cmd - b      : ~/.config/skhd/toggle-app.sh Arc
-ctrl + cmd - g      : ~/.config/skhd/toggle-app.sh ChatGPT
-ctrl + cmd - i      : ~/.config/skhd/toggle-app.sh Messages
-ctrl + cmd - m      : ~/.config/skhd/toggle-app.sh Messenger
-ctrl + cmd - n      : ~/.config/skhd/toggle-app.sh Notion
-ctrl + cmd - o      : ~/.config/skhd/toggle-app.sh Obsidian
-ctrl + cmd - s      : ~/.config/skhd/toggle-app.sh Slack
-ctrl + cmd - z      : ~/.config/skhd/toggle-app.sh Zalo
+rcmd - a      : ~/.config/skhd/toggle-app.sh Asana
+rcmd - b      : ~/.config/skhd/toggle-app.sh Arc
+rcmd - g      : ~/.config/skhd/toggle-app.sh ChatGPT
+rcmd - i      : ~/.config/skhd/toggle-app.sh Messages
+rcmd - m      : ~/.config/skhd/toggle-app.sh Messenger
+rcmd - n      : ~/.config/skhd/toggle-app.sh Notion
+rcmd - o      : ~/.config/skhd/toggle-app.sh Obsidian
+rcmd - s      : ~/.config/skhd/toggle-app.sh Slack
+rcmd - z      : ~/.config/skhd/toggle-app.sh Zalo
 
 shift + cmd - c     : open raycast://extensions/raycast/clipboard-history/clipboard-history
 shift + cmd - d     : open raycast://extensions/raycast/dictionary/define-word
 shift + cmd - m     : open raycast://extensions/ratoru/google-maps-search/travelTo
 shift + cmd - e     : open raycast://extensions/raycast/emoji-symbols/search-emoji-symbols
 shift + cmd - f     : open raycast://extensions/raycast/file-search/search-files
-
-
-

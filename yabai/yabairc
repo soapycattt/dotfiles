@@ -1,6 +1,7 @@
 # default layout (can be bsp, stack or float)
 yabai -m config layout bsp
 yabai -m config --space 1 layout float
+yabai -m config --space 2 layout float
 
 # new window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
@@ -31,9 +32,31 @@ yabai -m rule --add app='^ Settings$' manage=off
 yabai -m rule --add app='^ Preferences$' manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^iTerm$" manage=off
-yabai -m rule --add app="^iTerm2$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^Activity Monitor$" manage=off
 yabai -m rule --add app="^Alacritty$" manage=off
 yabai -m rule --add app="Todoist" manage=off
 yabai -m rule --add app="Finder" manage=off
+yabai -m rule --add app="Asana" manage=off
+
+
+# default space for apps 
+yabai -m rule --add app="^Slack$" space=1
+yabai -m rule --add app="^Messenger$" space=1
+yabai -m rule --add app="^Whatsapp$" space=1
+yabai -m rule --add app="^Telegram$" space=1
+yabai -m rule --add app="^Zalo$" space=1
+yabai -m rule --add app="^iTerm$" space=1
+yabai -m rule --add app="^Alacritty$" space=1
+
+yabai -m rule --add app="^Asana$" space=2
+yabai -m rule --add app="^Todoist$" space=2
+yabai -m rule --add app="^Notion$" space=2
+yabai -m rule --add app="^Obsidian$" space=2
+
+yabai -m rule --add app="^Safari$" space=^3
+yabai -m rule --add app="^FireFox$" space=^3
+yabai -m rule --add app="^Edge$" space=^3
+yabai -m rule --add app="^Chrome$" space=^3
+
+yabai -m rule --add app="^Code$" space=^4
