@@ -6,6 +6,13 @@ yabai -m config layout bsp
 yabai -m config --space 1 layout float
 yabai -m config --space 2 layout float
 
+# label space 
+yabai -m space 1 --label 1.chat
+yabai -m space 2 --label 2.doc
+yabai -m space 3 --label 3.browser
+yabai -m space 4 --label 4.code
+
+
 # new window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
 

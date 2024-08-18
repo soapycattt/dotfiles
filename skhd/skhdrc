@@ -9,12 +9,12 @@ ctrl + alt + cmd - r : \
 
 
 # -- Changing Window Focus --
-ctrl + alt + cmd - h : ~/.config/skhd/yabai-focus.sh west
-ctrl + alt + cmd - j : ~/.config/skhd/yabai-focus.sh south
-ctrl + alt + cmd - k : ~/.config/skhd/yabai-focus.sh north
-ctrl + alt + cmd - l : ~/.config/skhd/yabai-focus.sh east
+ctrl + cmd - h : ~/.config/skhd/yabai-focus.sh west
+ctrl + cmd - j : ~/.config/skhd/yabai-focus.sh south
+ctrl + cmd - k : ~/.config/skhd/yabai-focus.sh north
+ctrl + cmd - l : ~/.config/skhd/yabai-focus.sh east
 # Focus current cursor
-ctrl + alt + cmd - m : yabai -m window --focus mouse
+ctrl + cmd - m : yabai -m window --focus mouse
 
 # -- Toggle -- 
 # <rows>:<cols>:<start-x>:<start-y>:<width>:<height>
@@ -25,16 +25,14 @@ ctrl + alt - 0x32 : yabai -m space --layout $(yabai -m query --spaces --space | 
 
 # rotate layout clockwise
 ctrl + alt - space : yabai -m space --rotate 270
-# flip along y-axis
-# ctrl + alt - y : yabai -m space --mirror y-axis
-# flip along x-axis
-# ctrl + alt - x : yabai -m space --mirror x-axis
+ctrl + alt - y : yabai -m space --mirror y-axis # flip along y-axis
+ctrl + alt - x : yabai -m space --mirror x-axis # flip along x-axis
 
 # move window and split
-# ctrl + alt - j : yabai -m window --warp south
-# ctrl + alt - k : yabai -m window --warp north
-# ctrl + alt - h : yabai -m window --warp west
-# ctrl + alt - l : yabai -m window --warp east
+# ctrl + cmd - j : yabai -m window --warp south
+# ctrl + cmd - k : yabai -m window --warp north
+# ctrl + cmd - h : yabai -m window --warp west
+# ctrl + cmd - l : yabai -m window --warp east
 
 
 # -- Modifying Window Size --
@@ -110,19 +108,20 @@ ctrl + alt - 7 : yabai -m window --space 7;
 
 # Hotkey to open app
 ctrl - return : ~/.config/skhd/toggle-app.sh Alacritty
-ctrl + cmd - a      : ~/.config/skhd/toggle-app.sh Asana
-ctrl + cmd - b      : ~/.config/skhd/toggle-app.sh Arc
-ctrl + cmd - g      : ~/.config/skhd/toggle-app.sh ChatGPT
-ctrl + cmd - i      : ~/.config/skhd/toggle-app.sh Messages
-ctrl + cmd - m      : ~/.config/skhd/toggle-app.sh Messenger
-ctrl + cmd - n      : ~/.config/skhd/toggle-app.sh Notion
-ctrl + cmd - o      : ~/.config/skhd/toggle-app.sh Obsidian
-ctrl + cmd - s      : ~/.config/skhd/toggle-app.sh Slack
-ctrl + cmd - z      : ~/.config/skhd/toggle-app.sh Zalo
-ctrl + cmd - d      : open ~/Downloads
+rcmd - a      : ~/.config/skhd/toggle-app.sh Asana
+rcmd - b      : ~/.config/skhd/toggle-app.sh Arc
+rcmd - g      : ~/.config/skhd/toggle-app.sh ChatGPT
+rcmd - i      : ~/.config/skhd/toggle-app.sh Messages
+rcmd - m      : ~/.config/skhd/toggle-app.sh Messenger
+rcmd - n      : ~/.config/skhd/toggle-app.sh Notion
+rcmd - o      : ~/.config/skhd/toggle-app.sh Obsidian
+rcmd - s      : ~/.config/skhd/toggle-app.sh Slack
+rcmd - z      : ~/.config/skhd/toggle-app.sh Zalo
+rcmd - d      : open ~/Downloads
 
 shift + cmd - c     : open raycast://extensions/raycast/clipboard-history/clipboard-history
 shift + cmd - d     : open raycast://extensions/raycast/dictionary/define-word
 shift + cmd - m     : open raycast://extensions/ratoru/google-maps-search/travelTo
 shift + cmd - e     : open raycast://extensions/raycast/emoji-symbols/search-emoji-symbols
 shift + cmd - f     : open raycast://extensions/raycast/file-search/search-files
+shift + cmd - r     : open raycast://extensions/raycast/apple-reminders/create-reminder

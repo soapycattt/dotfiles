@@ -1442,26 +1442,6 @@
                                     "key_code": "grave_accent_and_tilde"
                                 }
                             ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "right_option"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "right_command"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "insert"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "right_option"
-                                }
-                            ]
                         }
                     ],
                     "treat_as_built_in_keyboard": false
