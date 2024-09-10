@@ -37,6 +37,7 @@ autoload -U colors && colors
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="jispwoso"
 
 # --- PLUGINS ---
 # Standard plugins can be found in $ZSH/plugins/
@@ -61,3 +62,6 @@ dotfiles=(
 for file in "${dotfiles[@]}"; do
   source "$HOME/dotfiles/$file"
 done
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

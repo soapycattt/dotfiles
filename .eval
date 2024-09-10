@@ -14,10 +14,10 @@ bindkey -s '^o' 'lfcd\n' # ctrl + o | lfcd
 
 # -- GCLOUD ---
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/soapycat/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/soapycat/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/soapycat/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/soapycat/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 
 # -- DIRENV ---
 eval "$(direnv hook zsh)"
@@ -32,14 +32,14 @@ export FZF_COMPLETION_TRIGGER='*'
 
 ## fzf-dbt
 FZF_DBT_PATH=~/.fzf-dbt/fzf-dbt.sh
-if [[ ! -f /Users/soapycat/.fzf-dbt/fzf-dbt.sh ]]; then
-	FZF_DBT_DIR=/Users/soapycat/.fzf-dbt
-	print -P "%F{green}Installing fzf-dbt into /Users/soapycat/.fzf-dbt%f"
-	mkdir -p /Users/soapycat/.fzf-dbt
-	command curl -L https://raw.githubusercontent.com/Infused-Insight/fzf-dbt/main/src/fzf_dbt.sh >/Users/soapycat/.fzf-dbt/fzf-dbt.sh && print -P "%F{green}Installation successful.%f" || print -P "%F{red}The download has failed.%f"
+if [[ ! -f $HOME/.fzf-dbt/fzf-dbt.sh ]]; then
+	FZF_DBT_DIR=$HOME/.fzf-dbt
+	print -P "%F{green}Installing fzf-dbt into $HOME/.fzf-dbt%f"
+	mkdir -p $HOME/.fzf-dbt
+	command curl -L https://raw.githubusercontent.com/Infused-Insight/fzf-dbt/main/src/fzf_dbt.sh >$HOME/.fzf-dbt/fzf-dbt.sh && print -P "%F{green}Installation successful.%f" || print -P "%F{red}The download has failed.%f"
 fi
 
-source /Users/soapycat/.fzf-dbt/fzf-dbt.sh
+source $HOME/.fzf-dbt/fzf-dbt.sh
 
 # --- TheFuck ---
 eval $(thefuck --alias)
