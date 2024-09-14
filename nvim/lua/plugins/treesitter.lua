@@ -11,6 +11,7 @@ return {
       "yaml",
       "lua",
       "terraform",
+      "javascript",
     })
   end,
 }

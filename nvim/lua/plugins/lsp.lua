@@ -19,6 +19,37 @@ return {
         desc = "[T]oggle LSP Diagnostics",
       }
     end,
+
+    config = function()
+      local lspconfig = require("lspconfig")
+
+      -- Setup TypeScript Language Server (tsserver)
+      lspconfig.tsserver.setup({
+        on_attach = function(client, bufnr)
+          -- Define keymaps for LSP commands
+          local opts = { buffer = bufnr }
+          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        end,
+        flags = {
+          debounce_text_changes = 150,
+        },
+        -- Add any additional configuration here
+        settings = {
+          javascript = {
+            format = {
+              enable = true,
+            },
+          },
+          typescript = {
+            format = {
+              enable = true,
+            },
+          },
+        },
+      })
+
+      -- Add configurations for other LSP servers here if needed
+    end,
   },
   { "tpope/vim-rails" },
   -- lspconfig

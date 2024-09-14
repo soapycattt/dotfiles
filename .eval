@@ -28,7 +28,14 @@ eval "$(direnv hook zsh)"
 
 ##  --- FZF ---
 export FZF_COMPLETION_TRIGGER='*'
+HISTFILE=~/.zsh_history
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+
 
 ## fzf-dbt
 FZF_DBT_PATH=~/.fzf-dbt/fzf-dbt.sh
