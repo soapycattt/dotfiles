@@ -56,12 +56,17 @@ plugins=(
 dotfiles=(
   .aliases
   .functions
-  .env
+  # .env
+  .env.quynhle
   .eval
 )
 for file in "${dotfiles[@]}"; do
   source "$HOME/dotfiles/$file"
 done
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/quynhethereal/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/quynhethereal/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/quynhethereal/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/quynhethereal/google-cloud-sdk/completion.zsh.inc'; fi
