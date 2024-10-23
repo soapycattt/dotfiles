@@ -1404,7 +1404,7 @@
                         "product_id": 834,
                         "vendor_id": 1452
                     },
-                    "ignore": false,
+                    "ignore": true,
                     "manipulate_caps_lock_led": true,
                     "mouse_flip_horizontal_wheel": false,
                     "mouse_flip_vertical_wheel": false,
