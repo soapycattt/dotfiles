@@ -75,10 +75,6 @@ return {
       hijack_netrw = false,
     },
 
-    cmd = {
-      "NvimTreeToggle",
-    },
-
     init = function()
       vim.keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
       vim.keymap.set(
