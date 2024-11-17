@@ -5,21 +5,17 @@ tap "microsoft/git"
 tap "koekeishiya/formulae"
 
 # Terminal Tool
-brew "direnv"
-brew "docker"
 brew "duckdb"
-brew "gh"
 brew "jq"
 brew "openssl@3", link: false
 brew "fastfetch"
 brew "wget"
-brew "tmux"
 brew "ripgrep"
-brew "fzf"
 brew "koekeishiya/formulae/yabai"
 brew "koekeishiya/formulae/skhd"
 brew "jordanbaird-ice"
-
+brew "lazygit"
+brew "bat"
 
 # Cask
 cask "karabiner-elements"

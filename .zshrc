@@ -51,7 +51,16 @@ plugins=(
   web-search
   forgit
   thefuck
-
+  direnv
+  docker
+  docker-compose
+  tmux
+  tmuxinator
+  fzf
+  gh
+  zoxide
+  battery
+  eza
 )
 
 # SOURCE vars and functions
