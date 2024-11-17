@@ -37,7 +37,6 @@ autoload -U colors && colors
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-# ZSH_THEME="jispwoso"
 
 # --- PLUGINS ---
 # Standard plugins can be found in $ZSH/plugins/
@@ -52,7 +51,16 @@ plugins=(
   web-search
   forgit
   thefuck
-
+  direnv
+  docker
+  docker-compose
+  tmux
+  tmuxinator
+  fzf
+  gh
+  zoxide
+  battery
+  eza
 )
 
 # SOURCE vars and functions

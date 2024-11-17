@@ -73,71 +73,66 @@ function install_package_managers() {
     fi
 }
 
-# Install dependencies
-function install_dependencies() {
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        read -p "Install Homebrew packages? (y/n) " -n 1
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            # Install packages from Brewfile
-            if [ -f ~/dotfiles/Brewfile ]; then
-                brew bundle --file=~/dotfiles/Brewfile
-            else
-                echo "Brewfile not found in ~/dotfiles"
-                return 1
-            fi
-        fi
-    fi
-}
-
 # Install development tools
 function install_dev_tools() {
-    # Install asdf version manager
-    read -p "Install asdf packages? (y/n) " -n 1
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        # Install plugins and versions
-        asdf plugin add python
-        asdf plugin add golang
-        asdf plugin add nodejs
-        asdf plugin add postgres
-        asdf plugin add neovim
+  # Oh-my-zsh should already contains asdf, sdk and brew
+  # Install asdf version manager
+  read -p "Install asdf packages? (y/n) " -n 1
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # Install plugins and versions
+    asdf plugin add python
+    asdf plugin add golang
+    asdf plugin add nodejs
+    asdf plugin add postgres
+    asdf plugin add neovim
 
 
-        # Install latest stable versions
-        asdf install python latest
-        asdf install golang latest
-        asdf install nodejs latest
-        asdf install postgres latest
-        asdf install neovim latest
+      # Install latest stable versions
+      asdf install python latest
+      asdf install golang latest
+      asdf install nodejs latest
+      asdf install postgres latest
+      asdf install neovim latest
 
-        # Set global versions
-        asdf global python latest
-        asdf global golang latest
-        asdf global nodejs latest
-        asdf global postgres latest
-        asdf global neovim latest
+      # Set global versions
+      asdf global python latest
+      asdf global golang latest
+      asdf global nodejs latest
+      asdf global postgres latest
+      asdf global neovim latest
 
-    # Install SDKMAN
-    read -p "Install SDKMAN packages? (y/n) " -n 1
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        # curl -s "https://get.sdkman.io" | bash
-        # source "$HOME/.sdkman/bin/sdkman-init.sh"
+  # Install SDKMAN
+  read -p "Install SDKMAN packages? (y/n) " -n 1
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # curl -s "https://get.sdkman.io" | bash
+    # source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-        # Install Java and Scala
-        sdk install java 11.0.21-open
-        sdk install scala 2.13.12
+      # Install Java and Scala
+      sdk install java 11.0.21-open
+      sdk install scala 2.13.12
 
-        # Set default versions
-        sdk default java 11.0.21-open
-        sdk default scala 2.13.12
+      # Set default versions
+      sdk default java 11.0.21-open
+      sdk default scala 2.13.12
+  fi
+
+  read -p "Install Homebrew packages? (y/n) " -n 1
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # Install packages from Brewfile
+    if [ -f ~/dotfiles/Brewfile ]; then
+      brew bundle --file=~/dotfiles/Brewfile
+    else
+      echo "Brewfile not found in ~/dotfiles"
+      return 1
     fi
+  fi
 }
 
 # Run installations
 install_package_managers
-install_dependencies
 install_dev_tools
 
 echo ""
