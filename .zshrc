@@ -48,8 +48,11 @@ plugins=(
   zsh-autosuggestions
   brew
   asdf
+  sdk
   web-search
   forgit
+  thefuck
+
 )
 
 # SOURCE vars and functions
