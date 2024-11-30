@@ -1,1784 +1,1485 @@
 {
-    "global": {
-        "ask_for_confirmation_before_quitting": true,
-        "check_for_updates_on_startup": true,
-        "show_in_menu_bar": true,
-        "show_profile_name_in_menu_bar": false,
-        "unsafe_ui": false
-    },
-    "profiles": [
-        {
-            "complex_modifications": {
-                "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 50,
-                    "basic.to_delayed_action_delay_milliseconds": 500,
-                    "basic.to_if_alone_timeout_milliseconds": 1000,
-                    "basic.to_if_held_down_threshold_milliseconds": 500,
-                    "mouse_motion_to_scroll.speed": 100
+  "profiles": [
+    {
+      "complex_modifications": {
+        "rules": [
+          {
+            "description": "vim-preview: map jk (down/up)",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "j"
                 },
-                "rules": [
-                    {
-                        "description": "vim-preview: map jk (down/up)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "j"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "k"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim preview: map JK (previous / next page)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow",
-                                        "modifiers": [
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow",
-                                        "modifiers": [
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim-preview: map hl (left / right)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "h"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "l"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim-preview: map HL (previous / next position)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "open_bracket",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "close_bracket",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim-preview: map zoom (9/0/-/=)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "9"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "9",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "0"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "0",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "hyphen"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "hyphen",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "equal_sign"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "equal_sign",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim-preview: map gG (go to first / last page)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "g"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "g",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim-preview: map cmd-b to toggle toc",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.apple\\.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "b",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "1",
-                                        "modifiers": [
-                                            "command",
-                                            "option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.apple\\.Preview$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "b",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "3",
-                                        "modifiers": [
-                                            "command",
-                                            "option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim-books: map jk (down/up)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.iBooksX$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "j"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.iBooksX$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "k"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim-books: map hl (left / right)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.iBooksX$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "h"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.iBooksX$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "l"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim-books: map cmd-b to cmd-t",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.iBooksX$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "b",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "t",
-                                        "modifiers": [
-                                            "command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "vim-books: map tab to space",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.apple\\.iBooksX$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "tab"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "spacebar"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "capslock - map to hyper",
-                        "manipulators": [
-                            {
-                                "description": "capslock = esc(click) | hyper(hold)",
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_shift",
-                                        "modifiers": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "escape"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "escape = capslock switch",
-                                "from": {
-                                    "key_code": "escape",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "caps_lock",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "spacebar = language switch",
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "spacebar",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "capslock - hyper vim navigation",
-                        "manipulators": [
-                            {
-                                "description": "option + h = mouse left",
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "x": -1600
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + option + h = mouse left fast",
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "x": -3200
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + control + h = mouse wheel left",
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "horizontal_wheel": 64
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + command + h = mouse wheel left fast",
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "horizontal_wheel": 128
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": " h = left",
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "option + j = mouse down",
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "y": 1600
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + option + j = mouse down fast",
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "y": 3200
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + control + j = mouse wheel down",
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "vertical_wheel": 64
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + command + j = mouse wheel down fast",
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "vertical_wheel": 128
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": " j = down",
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "option + k = mouse up",
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "y": -1600
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + option + k = mouse up fast",
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "y": -3200
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + control + k = mouse wheel up",
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "vertical_wheel": -64
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + command + k = mouse wheel up fast",
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "vertical_wheel": -128
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": " k = up",
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "option + l = mouse move right",
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "x": 1600
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + option + l = mouse move right fast",
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "x": 3200
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + control + l = mouse wheel right",
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_control",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "horizontal_wheel": -64
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "shift + command + l = mouse wheel right fast",
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "mouse_key": {
-                                            "horizontal_wheel": -128
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": " l = right",
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "option + u = mouse left click",
-                                "from": {
-                                    "key_code": "u",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "pointing_button": "button1"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "option + i = mouse right click",
-                                "from": {
-                                    "key_code": "i",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "pointing_button": "button2"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "enter = button1 (mouse left click)",
-                                "from": {
-                                    "key_code": "return_or_enter",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "pointing_button": "button1"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "command + enter = button2 (mouse right click)",
-                                "from": {
-                                    "key_code": "return_or_enter",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "pointing_button": "button2"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "capslock - hyper quick interact with screen",
-                        "manipulators": [
-                            {
-                                "description": "q = display screen saver",
-                                "from": {
-                                    "key_code": "q",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a ScreenSaverEngine"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "cmd + q = lock screen",
-                                "from": {
-                                    "key_code": "q",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "q",
-                                        "modifiers": [
-                                            "left_control",
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "cmd + fn + q = sleep",
-                                "from": {
-                                    "key_code": "q",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "fn",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "pmset displaysleepnow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "hyper + cmd + a = show desktop",
-                                "from": {
-                                    "key_code": "a",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f11"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "hyper + cmd + l = ctrl + right (next desktop)",
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "hyper + cmd + h = ctrl + left (prev desktop)",
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "hyper + cmd + j = ctrl + down (display all windows of the current app)",
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "hyper + cmd + k = ctrl + up (display all windows in the current dekstop)",
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
+                "to": [
+                  {
+                    "key_code": "down_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "k"
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim preview: map JK (previous / next page)",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "down_arrow",
+                    "modifiers": [
+                      "left_option"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow",
+                    "modifiers": [
+                      "left_option"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim-preview: map hl (left / right)",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "h"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "l"
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim-preview: map HL (previous / next position)",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "open_bracket",
+                    "modifiers": [
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "close_bracket",
+                    "modifiers": [
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim-preview: map zoom (9/0/-/=)",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "9"
+                },
+                "to": [
+                  {
+                    "key_code": "9",
+                    "modifiers": [
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "0"
+                },
+                "to": [
+                  {
+                    "key_code": "0",
+                    "modifiers": [
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "hyphen"
+                },
+                "to": [
+                  {
+                    "key_code": "hyphen",
+                    "modifiers": [
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "equal_sign"
+                },
+                "to": [
+                  {
+                    "key_code": "equal_sign",
+                    "modifiers": [
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim-preview: map gG (go to first / last page)",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "g"
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow",
+                    "modifiers": [
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "down_arrow",
+                    "modifiers": [
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim-preview: map cmd-b to toggle toc",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "b",
+                  "modifiers": {
+                    "mandatory": [
+                      "command",
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "1",
+                    "modifiers": [
+                      "command",
+                      "option"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.Preview$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "b",
+                  "modifiers": {
+                    "mandatory": [
+                      "command"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "3",
+                    "modifiers": [
+                      "command",
+                      "option"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim-books: map jk (down/up)",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.iBooksX$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "j"
+                },
+                "to": [
+                  {
+                    "key_code": "down_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.iBooksX$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "k"
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim-books: map hl (left / right)",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.iBooksX$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "h"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.iBooksX$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "l"
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim-books: map cmd-b to cmd-t",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com.apple.iBooksX$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "b",
+                  "modifiers": {
+                    "mandatory": [
+                      "command"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "t",
+                    "modifiers": [
+                      "command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "vim-books: map tab to space",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.iBooksX$"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "tab"
+                },
+                "to": [
+                  {
+                    "key_code": "spacebar"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "capslock - map to hyper",
+            "manipulators": [
+              {
+                "description": "capslock = esc(click) | hyper(hold)",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_shift",
+                    "modifiers": [
+                      "right_command",
+                      "right_control",
+                      "right_option"
+                    ]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "escape"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "escape = capslock switch",
+                "from": {
+                  "key_code": "escape",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ],
+                    "optional": [
+                      "caps_lock"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "caps_lock",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "spacebar = language switch",
+                "from": {
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "spacebar",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "capslock - hyper vim navigation",
+            "manipulators": [
+              {
+                "description": "option + h = mouse left",
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "mouse_key": {
+                      "x": -1600
                     }
-                ]
-            },
-            "devices": [
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 834,
-                        "vendor_id": 1452
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + option + h = mouse left fast",
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 834,
-                        "vendor_id": 1452
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "x": -3200
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + control + h = mouse wheel left",
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_control",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 591,
-                        "vendor_id": 1452
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "simple_modifications": [
-                        {
-                            "from": {
-                                "key_code": "escape"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "grave_accent_and_tilde"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "insert"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "right_option"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "right_option"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "right_command"
-                                }
-                            ]
-                        }
-                    ],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "horizontal_wheel": 64
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + command + h = mouse wheel left fast",
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 50484,
-                        "vendor_id": 1133
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "horizontal_wheel": 128
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " h = left",
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 50484,
-                        "vendor_id": 1133
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "key_code": "left_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "option + j = mouse down",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 50479,
-                        "vendor_id": 1133
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "y": 1600
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + option + j = mouse down fast",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": true,
-                        "product_id": 591,
-                        "vendor_id": 1452
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "y": 3200
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + control + j = mouse wheel down",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_control",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 49291,
-                        "vendor_id": 1133
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "vertical_wheel": 64
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + command + j = mouse wheel down fast",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 49291,
-                        "vendor_id": 1133
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "vertical_wheel": 128
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " j = down",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 1296,
-                        "vendor_id": 1204
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "key_code": "down_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "option + k = mouse up",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": true,
-                        "product_id": 2611,
-                        "vendor_id": 13364
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "y": -1600
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + option + k = mouse up fast",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 2611,
-                        "vendor_id": 13364
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "simple_modifications": [
-                        {
-                            "from": {
-                                "key_code": "end"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "right_option"
-                                }
-                            ]
-                        }
-                    ],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "y": -3200
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + control + k = mouse wheel up",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_control",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 53296,
-                        "vendor_id": 13364
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": true
+                "to": [
+                  {
+                    "mouse_key": {
+                      "vertical_wheel": -64
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + command + k = mouse wheel up fast",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 53296,
-                        "vendor_id": 13364
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                "to": [
+                  {
+                    "mouse_key": {
+                      "vertical_wheel": -128
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " k = up",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
                 },
+                "to": [
+                  {
+                    "key_code": "up_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "option + l = mouse move right",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "mouse_key": {
+                      "x": 1600
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + option + l = mouse move right fast",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "mouse_key": {
+                      "x": 3200
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + control + l = mouse wheel right",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_control",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "mouse_key": {
+                      "horizontal_wheel": -64
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "shift + command + l = mouse wheel right fast",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "mouse_key": {
+                      "horizontal_wheel": -128
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": " l = right",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "option + u = mouse left click",
+                "from": {
+                  "key_code": "u",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "pointing_button": "button1"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "option + i = mouse right click",
+                "from": {
+                  "key_code": "i",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_option",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "pointing_button": "button2"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "enter = button1 (mouse left click)",
+                "from": {
+                  "key_code": "return_or_enter",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "pointing_button": "button1"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "command + enter = button2 (mouse right click)",
+                "from": {
+                  "key_code": "return_or_enter",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "pointing_button": "button2"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "capslock - hyper quick interact with screen",
+            "manipulators": [
+              {
+                "description": "q = display screen saver",
+                "from": {
+                  "key_code": "q",
+                  "modifiers": {
+                    "mandatory": [
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a ScreenSaverEngine"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "cmd + q = lock screen",
+                "from": {
+                  "key_code": "q",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "q",
+                    "modifiers": [
+                      "left_control",
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "hyper + fn + q = sleep",
+                "from": {
+                  "key_code": "q",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "fn",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "pmset displaysleepnow"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "hyper + cmd + a = show desktop",
+                "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "f11",
+                    "modifiers": "fn"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "hyper + cmd + l = ctrl + right (next desktop)",
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "hyper + cmd + h = ctrl + left (prev desktop)",
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "hyper + cmd + j = ctrl + down (display all windows of the current app)",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "down_arrow",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "description": "hyper + cmd + k = ctrl + up (display all windows in the current dekstop)",
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "right_command",
+                      "right_control",
+                      "right_shift",
+                      "right_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          }
+        ]
+      },
+      "devices": [
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "product_id": 591,
+            "vendor_id": 1452
+          },
+          "simple_modifications": [
+            {
+              "from": {
+                "key_code": "escape"
+              },
+              "to": [
                 {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "identifiers": {
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 45110,
-                        "vendor_id": 1133
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
+                  "key_code": "grave_accent_and_tilde"
                 }
-            ],
-            "fn_function_keys": [
-                {
-                    "from": {
-                        "key_code": "f1"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f2"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_increment"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f3"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "mission_control"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f4"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "spotlight"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f5"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "dictation"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f6"
-                    },
-                    "to": [
-                        {
-                            "key_code": "f6"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f7"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "rewind"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f8"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "play_or_pause"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f9"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "fast_forward"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f10"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "mute"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f11"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f12"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_increment"
-                        }
-                    ]
-                }
-            ],
-            "name": "Default profile",
-            "parameters": {
-                "delay_milliseconds_before_open_device": 1000
+              ]
             },
-            "selected": true,
-            "simple_modifications": [],
-            "virtual_hid_keyboard": {
-                "country_code": 0,
-                "indicate_sticky_modifier_keys_state": true,
-                "mouse_key_xy_scale": 100
+            {
+              "from": {
+                "key_code": "insert"
+              },
+              "to": [
+                {
+                  "key_code": "right_option"
+                }
+              ]
+            },
+            {
+              "from": {
+                "key_code": "right_option"
+              },
+              "to": [
+                {
+                  "key_code": "right_command"
+                }
+              ]
             }
+          ]
+        },
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "is_pointing_device": true,
+            "product_id": 591,
+            "vendor_id": 1452
+          },
+          "ignore": false
+        },
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "is_pointing_device": true,
+            "product_id": 2611,
+            "vendor_id": 13364
+          },
+          "ignore": false,
+          "treat_as_built_in_keyboard": true
+        },
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "product_id": 2611,
+            "vendor_id": 13364
+          },
+          "simple_modifications": [
+            {
+              "from": {
+                "key_code": "end"
+              },
+              "to": [
+                {
+                  "key_code": "right_option"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "product_id": 53296,
+            "vendor_id": 13364
+          },
+          "treat_as_built_in_keyboard": true
+        },
+        {
+          "identifiers": {
+            "is_pointing_device": true,
+            "product_id": 53296,
+            "vendor_id": 13364
+          },
+          "ignore": false
         }
-    ]
+      ],
+      "name": "Default profile",
+      "selected": true,
+      "virtual_hid_keyboard": {
+        "country_code": 0,
+        "keyboard_type_v2": "ansi"
+      }
+    }
+  ]
 }

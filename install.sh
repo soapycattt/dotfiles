@@ -31,14 +31,12 @@ function doSync() {
     syncFile ".tmux.conf"
     
     # Add any specific symlinks
-    ln -s ~/dotfiles/nvim ~/.config/
-    ln -s ~/dotfiles/skhd ~/.config/
-    ln -s ~/dotfiles/yabai ~/.config/
-    ln -s ~/dotfiles/yazi ~/.config/
-    ln -s ~/dotfiles/hammerspoon ~/.config/
-    ln -s ~/dotfiles/karabiner ~/.config/
-    ln -s ~/dotfiles/ubersicht ~/Library/Application\ Support/Übersicht/widgets
-    ln -s ~/dotfiles/zsh/site-functions ~/.local/share/zsh/site-functions
+    ln -fs ~/dotfiles/nvim ~/.config/
+    ln -fs ~/dotfiles/skhd ~/.config/
+    ln -fs ~/dotfiles/yabai ~/.config/
+    ln -fs ~/dotfiles/yazi ~/.config/
+    ln -fs ~/dotfiles/hammerspoon ~/.config/
+    ln -fs ~/dotfiles/karabiner ~/.config/
     
     return 0
 }
@@ -101,6 +99,7 @@ function install_dev_tools() {
       asdf global nodejs latest
       asdf global postgres latest
       asdf global neovim latest
+  fi
 
   # Install SDKMAN
   read -p "Install SDKMAN packages? (y/n) " -n 1
@@ -132,8 +131,9 @@ function install_dev_tools() {
 }
 
 # Run installations
-install_package_managers
+# install_package_managers
 install_dev_tools
+# install_package_managers
 
 echo ""
 echo "🎉 All done! Please restart your terminal." 

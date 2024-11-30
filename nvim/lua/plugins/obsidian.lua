@@ -24,11 +24,11 @@ return {
     workspaces = {
       {
         name = "vault",
-        path = "~/Documents/Persona/Obsidian",
+        path = "~/Documents/personal/obsidian-vault",
       },
     },
     templates = {
-      folder = "~/Documents/Persona/Obsidian/template",
+      folder = "~/Documents/personal/obsidian-vault/template",
       date_format = "%Y-%m-%d-%a",
       time_format = "%H:%M",
     },

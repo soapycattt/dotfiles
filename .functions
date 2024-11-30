@@ -25,8 +25,8 @@ preexec() { echo -ne '\e[5 q'; } # Use beam shape cursor for each new prompt.
 
 # ------------------------------FZF-------------------------------------
 function fwork() {
-	cd $({ find $HOME/Documents/Work/Holistics -maxdepth 2 -type d -print 2>/dev/null; } | fzf -q "$1")
-	# cd $(fd . $HOME/Documents/Work/Holistics --hidden -d 2 | 2> /dev/null | fzf)
+	# cd $({ find $HOME/Documents/Work/Holistics -maxdepth 2 -type d -print 2>/dev/null; } | fzf -q "$1")
+	cd $(fd . $GOPATH/src/gitlab.myteksi.net --hidden -d 2 | 2> /dev/null | fzf)
 }
 
 function fper() {
@@ -35,7 +35,7 @@ function fper() {
 }
 
 function fdot() {
-	vim $(fd . ~/dotfiles --hidden -d 1 | 2>/dev/null | fzf -q "$1")
+	nvim $(fd . ~/dotfiles --hidden -d 1 | 2>/dev/null | fzf -q "$1")
 
 }
 

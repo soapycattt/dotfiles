@@ -1,0 +1,15 @@
+return {
+  -- "dial.nvim",
+  -- "flit.nvim",
+  -- "leap.nvim",
+  -- "vim-repeat",
+  -- "yanky.nvim",
+  -- "nvim-ts-context-commentstring",
+  "mini.move",
+  "lazy.nvim",
+  "mini.ai",
+  "mini.pairs",
+  "mini.surround",
+  "nvim-treesitter",
+  "nvim-treesitter-textobjects",
+}

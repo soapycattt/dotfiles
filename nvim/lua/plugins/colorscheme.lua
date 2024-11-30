@@ -62,5 +62,9 @@ return {
     opts = {
       transparent_background = true,
     },
+    config = function()
+      vim.g.everforest_dim_inactive_windows = 1
+      vim.g.everforest_show_eob = 0
+    end,
   },
 }

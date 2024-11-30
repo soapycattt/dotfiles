@@ -122,6 +122,7 @@ rcmd - d      : open ~/Downloads
 shift + cmd - c     : open raycast://extensions/raycast/clipboard-history/clipboard-history
 shift + cmd - d     : open raycast://extensions/raycast/dictionary/define-word
 shift + cmd - m     : open raycast://extensions/ratoru/google-maps-search/travelTo
-shift + cmd - e     : open raycast://extensions/raycast/emoji-symbols/search-emoji-symbols
 shift + cmd - f     : open raycast://extensions/raycast/file-search/search-files
 shift + cmd - r     : open raycast://extensions/raycast/apple-reminders/create-reminder
+
+# fn     : open raycast://extensions/raycast/emoji-symbols/search-emoji-symbols

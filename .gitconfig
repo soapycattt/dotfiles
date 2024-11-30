@@ -4,10 +4,8 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [user]
-	name = Triet Le
-	email = triet.lq@holistics.io
-[credential]
-	helper = /usr/local/share/gcm-core/git-credential-manager
+	name = Ben Le
+	email = triet.lequang@grabtaxi.com
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 [alias]
@@ -19,6 +17,7 @@
 [core]
   editor = nvim
   pager = delta
+	fsmonitor = true
 
 [interactive]
   diffFilter = delta --color-only
@@ -35,3 +34,11 @@
 
 [diff]
   colorMoved = default
+[feature]
+	manyFiles = true
+[url "git@gitlab.myteksi.net:"]
+	insteadOf = https://gitlab.myteksi.net/
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+	helper = manager-core

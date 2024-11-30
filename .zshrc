@@ -42,15 +42,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
-  git 
-  zsh-syntax-highlighting 
-  zsh-autosuggestions
   brew
   asdf
   sdk
   web-search
-  forgit
-  thefuck
   direnv
   docker
   docker-compose
@@ -61,15 +56,26 @@ plugins=(
   zoxide
   battery
   eza
+  zsh-syntax-highlighting 
+  zsh-autosuggestions
+  forgit
+  thefuck
 )
+
+
 
 # SOURCE vars and functions
 dotfiles=(
-  .aliases
   .functions
+  .aliases
   .env
   .eval
 )
+
+
 for file in "${dotfiles[@]}"; do
   source "$HOME/dotfiles/$file"
 done
+
+
+source ~/.grabrc

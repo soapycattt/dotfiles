@@ -1,109 +1,130 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-
+    "sourcegraph/sg.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("copilot").setup({
-        panel = {
-          enabled = true,
-          auto_refresh = false,
-          keymap = {
-            jump_prev = "[[",
-            jump_next = "]]",
-            accept = "<CR>",
-            refresh = "gr",
-            open = "<M-CR>",
-          },
-          layout = {
-            position = "bottom", -- | top | left | right
-            ratio = 0.4,
-          },
-        },
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 75,
-          keymap = {
-            accept = "<S-Tab>",
-            accept_word = false,
-            accept_line = false,
-            next = "<M-]>",
-            prev = "<M-[>",
-            dismiss = "<C-]>",
-          },
-        },
-        filetypes = {
-          yaml = false,
-          markdown = false,
-          help = false,
-          gitcommit = false,
-          gitrebase = false,
-          hgcommit = false,
-          svn = false,
-          cvs = false,
-          ["."] = false,
-        },
-        copilot_node_command = "node", -- Node.js version must be > 18.x
-        server_opts_overrides = {},
-      })
+      require("sg").setup({})
     end,
-    -- opts = {
-    --   suggestion = { enabled = false },
-    --   panel = { enabled = false },
-    --   filetypes = {
-    --     markdown = true,
-    --     help = true,
-    --   },
-    -- },
   },
-
+  {
+    "github/copilot.vim",
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      -- See Configuration section for options
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   build = ":Copilot auth",
+  --
+  --   config = function()
+  --     require("copilot").setup({
+  --       panel = {
+  --         enabled = true,
+  --         auto_refresh = false,
+  --         keymap = {
+  --           jump_prev = "[[",
+  --           jump_next = "]]",
+  --           accept = "<CR>",
+  --           refresh = "gr",
+  --           open = "<M-CR>",
+  --         },
+  --         layout = {
+  --           position = "bottom", -- | top | left | right
+  --           ratio = 0.4,
+  --         },
+  --       },
+  --       suggestion = {
+  --         enabled = true,
+  --         auto_trigger = true,
+  --         debounce = 75,
+  --         keymap = {
+  --           accept = "<S-Tab>",
+  --           accept_word = false,
+  --           accept_line = false,
+  --           next = "<M-]>",
+  --           prev = "<M-[>",
+  --           dismiss = "<C-]>",
+  --         },
+  --       },
+  --       filetypes = {
+  --         yaml = false,
+  --         markdown = false,
+  --         help = false,
+  --         gitcommit = false,
+  --         gitrebase = false,
+  --         hgcommit = false,
+  --         svn = false,
+  --         cvs = false,
+  --         ["."] = false,
+  --       },
+  --       copilot_node_command = "node", -- Node.js version must be > 18.x
+  --       server_opts_overrides = {},
+  --     })
+  --   end,
+  -- opts = {
+  --   suggestion = { enabled = false },
+  --   panel = { enabled = false },
+  --   filetypes = {
+  --     markdown = true,
+  --     help = true,
+  --   },
+  -- },
+  -- },
   {
     "L3MON4D3/LuaSnip",
     keys = {
-      { "<tab>",   mode = { "s" },      false },
+      { "<tab>", mode = { "s" }, false },
       { "<s-tab>", mode = { "i", "s" }, false },
     },
 
     config = function()
-      local ls = require 'luasnip'
+      local ls = require("luasnip")
 
       -- Define the snippet
       ls.snippets = {
         all = {
-          ls.parser.parse_snippet("tablesample", "TABLESAMPLE SYSTEM (5 PERCENT)")
-        }
+          ls.parser.parse_snippet("tablesample", "TABLESAMPLE SYSTEM (5 PERCENT)"),
+        },
       }
-    end
+    end,
   },
 
   {
     "nvim-cmp",
     dependencies = {
-      {
-        "zbirenbaum/copilot-cmp",
-        dependencies = "copilot.lua",
-        opts = {},
-        config = function(_, opts)
-          local copilot_cmp = require("copilot_cmp")
-          copilot_cmp.setup(opts)
-          -- attach cmp source whenever copilot attaches
-          -- fixes lazy-loading issues with the copilot cmp source
-          require("lazyvim.util").lsp.on_attach(function(client)
-            if client.name == "copilot" then
-              copilot_cmp._on_insert_enter({})
-            end
-          end)
-        end,
-      },
-
-      "hrsh7th/cmp-buffer",           -- source for text in buffer
-      "hrsh7th/cmp-path",             -- source for file system paths
-      "L3MON4D3/LuaSnip",             -- snippet engine
-      "saadparwaiz1/cmp_luasnip",     -- for autocompletion
+      -- {
+      --   "zbirenbaum/copilot-cmp",
+      --   dependencies = "copilot.lua",
+      --   opts = {},
+      --   config = function(_, opts)
+      --     local copilot_cmp = require("copilot_cmp")
+      --     copilot_cmp.setup(opts)
+      --     -- attach cmp source whenever copilot attaches
+      --     -- fixes lazy-loading issues with the copilot cmp source
+      --     require("lazyvim.util").lsp.on_attach(function(client)
+      --       if client.name == "copilot" then
+      --         copilot_cmp._on_insert_enter({})
+      --       end
+      --     end)
+      --   end,
+      -- },
+      "hrsh7th/cmp-buffer", -- source for text in buffer
+      "hrsh7th/cmp-path", -- source for file system paths
+      "L3MON4D3/LuaSnip", -- snippet engine
+      "saadparwaiz1/cmp_luasnip", -- for autocompletion
       "rafamadriz/friendly-snippets", -- useful snippets
-      "onsails/lspkind.nvim",         -- vs-code like pictograms
+      "onsails/lspkind.nvim", -- vs-code like pictograms
       -- Adds LSP completion capabilities
       "hrsh7th/cmp-nvim-lsp",
     },
@@ -132,15 +153,15 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-          ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+          ["<C-e>"] = cmp.mapping.abort(), -- close completion window
           ["<CR>"] = cmp.mapping.confirm({ select = false }),
         }),
         -- sources for autocompletion
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" }, -- snippets
-          { name = "buffer" },  -- text within current buffer
-          { name = "path" },    -- file system paths
+          { name = "buffer" }, -- text within current buffer
+          { name = "path" }, -- file system paths
           { name = "copilot" },
         }),
         -- configure lspkind for vs-code like pictograms in completion menu
@@ -155,7 +176,7 @@ return {
         sources = {
           { name = "vim-dadbob-completion" },
           { name = "buffer" },
-        }
+        },
       })
     end,
 

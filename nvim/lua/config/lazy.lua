@@ -7,6 +7,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+-- if vim.g.vscode then
+--   require("lazy").setup({
+--     {
+--       "LazyVim/LazyVim",
+--     },
+--     { import = "vscode_configs/plugins" },
+--   })
+-- else
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
@@ -17,6 +25,14 @@ require("lazy").setup({
         colorscheme = "everforest",
       },
     },
+    { import = "lazyvim.plugins.extras.vscode" },
+    { import = "lazyvim.plugins.extras.lang.go" },
+    { import = "lazyvim.plugins.extras.lang.python" },
+    { import = "lazyvim.plugins.extras.lang.yaml" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    { import = "lazyvim.plugins.extras.lang.markdown" },
+    { import = "lazyvim.plugins.extras.lang.sql" },
+    { import = "lazyvim.plugins.extras.vscode" },
     { import = "plugins" },
   },
   defaults = {
@@ -45,3 +61,4 @@ require("lazy").setup({
     },
   },
 })
+-- end
